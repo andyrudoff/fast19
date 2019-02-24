@@ -29,14 +29,23 @@ grep -i nvdimm /boot/config-`uname -r`
 #
 # Use ndctl to show that you have pmem installed:
 #
-ndctl list -iNuRD
+ndctl list -u
+
+#
+# Intel-specific:
+#
+ipmctl show -dimm
+ipmctl show -memoryresources
 
 #
 # Create a DAX-capable file system and mount it:
 #
-mkdir /mnt/pmem-fsdax
+mkdir /mnt/pmem-fsdax0 /mnt/pmem-fsdax1
+mkfs.ext4 /dev/pmem0
 mkfs.ext4 /dev/pmem1
-mount -o dax /dev/pmem1 /mnt/pmem-fsdax
+mount -o dax /dev/pmem0 /mnt/pmem-fsdax0
+mount -o dax /dev/pmem1 /mnt/pmem-fsdax1
+df -h
 
 #
 # Some of the examples use PMDK.  Many distros include PMDK, but
