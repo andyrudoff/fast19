@@ -86,10 +86,10 @@ make
 # raw.c contains the simplest possible memory-mapped pmem example
 # this illustrates how to use mmap().  nothing transactional here!
 #
-dd if=/dev/zero of=/mnt/pmem-fsdax/daxfile bs=4k count=1
-od -c /mnt/pmem-fsdax/daxfile
-./raw /mnt/pmem-fsdax/daxfile
-od -c /mnt/pmem-fsdax/daxfile
+dd if=/dev/zero of=/mnt/pmem-fsdax0/daxfile bs=4k count=1
+od -c /mnt/pmem-fsdax0/daxfile
+./raw /mnt/pmem-fsdax0/daxfile
+od -c /mnt/pmem-fsdax0/daxfile
 
 #
 # freq.c
@@ -118,18 +118,18 @@ od -c /mnt/pmem-fsdax/daxfile
 #
 # We also use freq_pmem_print.c to display the currrent hash table contents.
 #
-pmempool create obj --layout=freq -s 100G /mnt/pmem-fsdax/freqcount
-pmempool info /mnt/pmem-fsdax/freqcount
-./freq_pmem_print /mnt/pmem-fsdax/freqcount
-./freq_pmem /mnt/pmem-fsdax/freqcount words.txt words.txt words.txt
-./freq_pmem_print /mnt/pmem-fsdax/freqcount
+pmempool create obj --layout=freq -s 100G /mnt/pmem-fsdax0/freqcount
+pmempool info /mnt/pmem-fsdax0/freqcount
+./freq_pmem_print /mnt/pmem-fsdax0/freqcount
+./freq_pmem /mnt/pmem-fsdax0/freqcount words.txt words.txt words.txt
+./freq_pmem_print /mnt/pmem-fsdax0/freqcount
 
 #
 # freq_pmem_cpp.c
 #
 # Similar to freq_pmem.c but uses the C++ bindings to libpmemobj.
 #
-./freq_pmem_cpp /mnt/pmem-fsdax/freqcount words.txt words.txt words.txt
+./freq_pmem_cpp /mnt/pmem-fsdax0/freqcount words.txt words.txt words.txt
 
 #
 # You brought in many more examples when you cloned the PMDK tree:
